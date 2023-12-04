@@ -24,4 +24,5 @@ int main() {
     GameManager x_o_game (new X_O_Board(), players);
     x_o_game.run();
     system ("pause");
+    return 0;
 }
