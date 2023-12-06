@@ -15,7 +15,7 @@ Pyramic_Board::Pyramic_Board()
 
 bool Pyramic_Board::update_board(int x, int y, char mark)
 {
-	if (x <= 2 && y <= x * 2 && board[x][y] == 0)
+	if (x < n_rows && y <= x * 2 && board[x][y] == 0)
 	{
 		board[x][y] = toupper(mark);
 		n_moves++;
@@ -26,10 +26,9 @@ bool Pyramic_Board::update_board(int x, int y, char mark)
 
 void Pyramic_Board::display_board()
 {
-	for (int i = 0; i < n_rows; ++i)
+	cout << '\n';
+	 for (int i = 0; i < n_rows; ++i)
 	{
-		//if (i)
-			//cout << "----------------------------------\n";
 		int spaces = n_rows - i - 1;
 		while (spaces--)
 			cout << "       ";

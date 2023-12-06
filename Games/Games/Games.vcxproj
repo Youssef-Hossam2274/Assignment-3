@@ -127,6 +127,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Connect 4_Board.cpp" />
+    <ClCompile Include="Five_Five_Board.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Games.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -135,7 +137,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoardGame_Classes.h" />
-    <ClInclude Include="Games.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

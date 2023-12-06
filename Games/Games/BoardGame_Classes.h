@@ -26,6 +26,25 @@ public:
 	bool game_is_over();
 };
 
+class connect4_Board :public Board {
+public:
+	connect4_Board();
+	bool update_board(int x, int y, char mark);
+	void display_board();
+	bool is_winner();
+	bool is_draw();
+	bool game_is_over();
+};
+
+class Five_Five_Board :public Board {
+public:
+	Five_Five_Board();
+	bool update_board(int x, int y, char mark);
+	void display_board();
+	bool is_winner();
+	bool is_draw();
+	bool game_is_over();
+};
 
 class Player {
 protected:

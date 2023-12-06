@@ -30,12 +30,15 @@
     <ClCompile Include="RandomPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Connect 4_Board.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Five_Five_Board.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoardGame_Classes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Games.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
