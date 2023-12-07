@@ -17,9 +17,17 @@ Player::Player(int order, char symbol) {
 }
 
 void Player::get_move(int& x, int& y) {
-    cout  << "\n" << to_string() << " with symbol " << get_symbol()
-          <<  " enter your move x and y from available bracket separated by spaces: ";
-    cin >> x >> y;
+    if (x != INT_MIN) {
+        cout << "\n" << to_string() << " with symbol " << get_symbol()
+            << " enter your move x and y from available bracket separated by spaces: ";
+        cin >> x >> y;
+    }
+    else
+    {
+        cout << "\n" << to_string() << " with symbol " << get_symbol()
+            << " Enter the column you want to play: ";
+        cin >> y;
+    }
 }
 
 string Player::to_string() {

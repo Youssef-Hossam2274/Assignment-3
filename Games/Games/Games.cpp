@@ -30,11 +30,11 @@ int main()
         players[1] = new RandomPlayer('O', 3);
 
     if (Game_choice == 1)
-        GameManager(new Pyramic_Board(), players).run();
+        GameManager(new Pyramic_Board(), players, false).run();
     else if (Game_choice == 2)
-        GameManager(new connect4_Board(), players).run();
+        GameManager(new connect4_Board(), players, true).run();
     else if (Game_choice == 3)
-        GameManager(new Five_Five_Board(), players).run();
+        GameManager(new Five_Five_Board(), players, false).run();
 
     system("pause");
 

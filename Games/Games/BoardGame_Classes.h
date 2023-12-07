@@ -73,7 +73,8 @@ class GameManager {
 private:
 	Board* boardPtr;
 	Player* players[2];
+	int x = -1, y = -1;
 public:
-	GameManager(Board*, Player* playerPtr[2]);
+	GameManager(Board*, Player* playerPtr[2], bool flag);
 	void run();
 };

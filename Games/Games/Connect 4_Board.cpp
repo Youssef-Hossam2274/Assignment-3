@@ -16,11 +16,16 @@ connect4_Board::connect4_Board()
 
 bool connect4_Board::update_board(int x, int y, char mark)
 {
-	if (x < n_rows && y < n_cols && board[x][y] == 0)
-	{
-		board[x][y] = toupper(mark);
-		n_moves++;
-		return true;
+	if (y < n_rows && y >= 0) {
+		for (int i = 5; i >= 0; i--) // loop over the column from buttom to the top
+		{
+			if (board[i][y] == 0)
+			{
+				board[i][y] = toupper(mark);
+				n_moves++;
+				return true;
+			}
+		}
 	}
 	return false;
 }
@@ -28,18 +33,29 @@ bool connect4_Board::update_board(int x, int y, char mark)
 void connect4_Board::display_board()
 {
 	cout << '\n';
-	for (int i = 0; i < n_rows; ++i)
-	{
-		cout << "|";
-		for (int j = 0; j < n_cols; ++j)
-		{
-			if (board[i][j] == 0)
-				cout << "(" << i << ", " << j << ')' << "|";
-			else
-				cout << "  " << board[i][j] << "   " << "|";
+
+	// Printing column numbers
+	cout << "  ";
+	for (int i = 0; i < n_cols; ++i) {
+		cout << "   " << i;
+	}
+	cout << '\n';
+
+	// Printing the game board
+	for (int i = 0; i < n_rows; ++i) {
+		cout << " |";
+		for (int j = 0; j < n_cols; ++j) {
+			cout << " _ |";
 		}
 		cout << '\n';
 	}
+
+	// Printing the bottom boundary
+	cout << " |";
+	for (int i = 0; i < n_cols; ++i) {
+		cout << "___|";
+	}
+	cout << '\n';
 }
 
 bool connect4_Board::is_winner()
