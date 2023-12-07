@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <chrono>
+#include <thread>
 
 using namespace std;
 
@@ -14,16 +16,12 @@ public:
     }
 
     void display() const {
-        string view(size, '=');
-        cout << view << endl;
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 cout << vec[i][j];
             }
-            cout<<endl;
+            cout << endl;
         }
-        cout << view << endl;
-
     }
 
     int count_neighbours(const int &row, const int &column) {
@@ -52,21 +50,31 @@ public:
     }
 
     void initialize() {
-        cout << "Enter the (x,y) for the alive cells\n" << "Enter any letter to stop :)\n";
-        int x, y;
-        while (cin >> x >> y) {
-            vec[x][y] = "⬜";
+        int x, y, cnt;
+        cout << "Enter the number of live cells you want\n";
+        cin >> cnt;
+        cout << "Enter the (x,y) for the alive cells :)\n";
 
+        while (cnt--) {
+            cin >> x >> y;
+            vec[x][y] = "⬜";
         }
-        cout<<"Your game initialized with:\n";
+        cout << "Your game initialized with:\n";
         display();
 
     }
 
-    void run(int times) {
+    void run() {
+        int times;
+        int speed;
+        cout << "Enter how many times to run:\n";
+        cin >> times;
+        cout << "Enter the speed in milliseconds 700  is recommended:\n";
+        cin >> speed;
         while (times--) {
             next_generation();
             display();
+            this_thread::sleep_for(chrono::milliseconds(speed));
         }
     }
 
@@ -91,15 +99,13 @@ public:
 };
 
 
-
 int main() {
     Universe u1(50);
 
     u1.initialize();
 
 
-    u1.run(10);
-
+    u1.run();
 
 
     return 0;
@@ -115,6 +121,4 @@ int main() {
 //27 25
 //27 26
 //27 27
-//s
-
 
