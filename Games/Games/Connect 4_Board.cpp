@@ -35,7 +35,7 @@ void connect4_Board::display_board()
 	cout << '\n';
 
 	// Printing column numbers
-	cout << "  ";
+
 	for (int i = 0; i < n_cols; ++i) {
 		cout << "   " << i;
 	}
@@ -45,11 +45,15 @@ void connect4_Board::display_board()
 	for (int i = 0; i < n_rows; ++i) {
 		cout << " |";
 		for (int j = 0; j < n_cols; ++j) {
-			cout << " _ |";
+			if (board[i][j] == 0) {
+				cout << " _ |";
+			}
+			else {
+				cout << " " << board[i][j] << " |";
+			}
 		}
 		cout << '\n';
 	}
-
 	// Printing the bottom boundary
 	cout << " |";
 	for (int i = 0; i < n_cols; ++i) {
@@ -60,14 +64,40 @@ void connect4_Board::display_board()
 
 bool connect4_Board::is_winner()
 {
-	// type Algorithm here:
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 4; j++) {
 
-	return false;
+			if (board[i][j] && (board[i + 1][j + 1] & board[i + 2][j + 2] & board[i + 3][j + 3]) == board[i][j]) // handle one diagonal 
+				return true; // Found a diagonal match with positive slope
+		}
+	}
+
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 4; j++) {
+
+			if (board[i][j] && (board[i + 1][j] & board[i + 2][j] & board[i + 3][j]) == board[i][j])  // handle verticall
+				return true;
+
+			if (board[i][j] && (board[i][j + 1] & board[i][j + 2] & board[i][j + 3]) == board[i][j]) // handle Horizontal
+				return true;
+		}
+	}
+
+	for (int i = n_rows - 1; i >= 3; i--) {
+		for (int j = n_cols - 1; j >= 4; j--) {
+
+			if (board[i][j] && (board[i - 1][j - 1] & board[i - 2][j - 2] & board[i - 3][j - 3]) == board[i][j])
+				return true; // Found a diagonal match with negative slope
+		}
+	}
+
+	return false; // No winner
 }
 
 bool connect4_Board::is_draw()
 {
-	// type Algorithm here:
+	return (n_moves == 42 && !is_winner());
+	return false;
 
 	return false;
 }
