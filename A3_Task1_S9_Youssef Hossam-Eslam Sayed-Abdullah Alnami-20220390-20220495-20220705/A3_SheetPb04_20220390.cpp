@@ -1,3 +1,10 @@
+// File name: A3_SheetPb03_20220390
+// Purpose: Build a set using any data structre.
+// Author(s): Youssef Hossam Ahmed       
+// ID(s): 20220390
+// Section: S9
+// Date: 4/12/2023
+
 #include <iostream>
 #include <vector>
 #include <algorithm>

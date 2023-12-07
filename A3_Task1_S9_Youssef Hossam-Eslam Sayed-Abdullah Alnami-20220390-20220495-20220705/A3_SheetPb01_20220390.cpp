@@ -1,3 +1,12 @@
+// File name: A3_SheetPb01_20220390
+// Purpose: Label Generator
+// Author(s): Yousef Hossam Ahmed     
+// ID(s): 20220390
+// Section: S9
+// Date: 3/12/2023
+
+
+
 #include <iostream>
 #include <string>
 #include <vector>
