@@ -16,7 +16,7 @@ connect4_Board::connect4_Board()
 
 bool connect4_Board::update_board(int x, int y, char mark)
 {
-	if (y < n_rows && y >= 0) {
+	if (y <= n_rows && y >= 0) {
 		for (int i = 5; i >= 0; i--) // loop over the column from buttom to the top
 		{
 			if (board[i][y] == 0)
@@ -64,29 +64,42 @@ void connect4_Board::display_board()
 
 bool connect4_Board::is_winner()
 {
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 4; j++) {
-
-			if (board[i][j] && (board[i + 1][j + 1] & board[i + 2][j + 2] & board[i + 3][j + 3]) == board[i][j]) // handle one diagonal 
-				return true; // Found a diagonal match with positive slope
+	// diagonal with positive slope handling
+	for (int i = n_rows - 1; i >= 0 ; i--) { 
+		for (int j = n_cols - 1; j >= 0 ; j--) {
+			
+			if (j + 3 <= n_cols && i - 3 >= 0 )
+			{
+				if (board[i][j] && (board[i - 1][j + 1] & board[i - 2][j + 2] & board[i - 3][j + 3]) == board[i][j]) // handle one diagonal 
+					return true; // Found a diagonal match with positive slope
+			}
+			
 		}
 	}
 
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 4; j++) {
-
-			if (board[i][j] && (board[i + 1][j] & board[i + 2][j] & board[i + 3][j]) == board[i][j])  // handle verticall
+	// verticall handling
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < n_cols; j++) {
+			if (board[i][j] && (board[i + 1][j] & board[i + 2][j] & board[i + 3][j]) == board[i][j])  
 				return true;
+		}
+	}
+
+	// Horizontal handling
+	for (int i = 0; i < n_rows; i++) {
+		for (int j = 0; j < 4; j++) {
 
 			if (board[i][j] && (board[i][j + 1] & board[i][j + 2] & board[i][j + 3]) == board[i][j]) // handle Horizontal
 				return true;
 		}
 	}
+	
+	// diagonal with a negative slope handling
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 4; j++) {
 
-	for (int i = n_rows - 1; i >= 3; i--) {
-		for (int j = n_cols - 1; j >= 4; j--) {
-
-			if (board[i][j] && (board[i - 1][j - 1] & board[i - 2][j - 2] & board[i - 3][j - 3]) == board[i][j])
+			if (board[i][j] && (board[i + 1][j + 1] & board[i + 2][j + 2] & board[i + 3][j + 3]) == board[i][j])
 				return true; // Found a diagonal match with negative slope
 		}
 	}
