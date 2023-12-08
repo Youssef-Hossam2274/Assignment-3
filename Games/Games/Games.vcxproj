@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AIPlayer.cpp" />
     <ClCompile Include="Connect 4_Board.cpp" />
     <ClCompile Include="Five_Five_Board.cpp" />
     <ClCompile Include="GameManager.cpp" />

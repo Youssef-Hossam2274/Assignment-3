@@ -60,3 +60,13 @@ bool Five_Five_Board::game_is_over()
 {
 	return false;
 }
+
+int Five_Five_Board::num_of_ways(int x, int y)
+{
+	return 0;
+}
+
+pair<int, int> Five_Five_Board::best_place()
+{
+	return pair<int, int>();
+}

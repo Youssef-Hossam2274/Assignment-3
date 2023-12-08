@@ -14,6 +14,8 @@ public:
 	virtual bool is_draw() = 0;
 	virtual void display_board() = 0;
 	virtual bool game_is_over() = 0;
+	virtual int num_of_ways(int x, int y) = 0;
+	virtual pair<int, int> best_place() = 0;
 };
 
 class Pyramic_Board :public Board {
@@ -24,6 +26,8 @@ public:
 	bool is_winner();
 	bool is_draw();
 	bool game_is_over();
+	int num_of_ways(int x, int y);
+	pair<int, int> best_place();
 };
 
 class connect4_Board :public Board {
@@ -34,6 +38,8 @@ public:
 	bool is_winner();
 	bool is_draw();
 	bool game_is_over();
+	int num_of_ways(int x, int y);
+	pair<int, int> best_place();
 };
 
 class Five_Five_Board :public Board {
@@ -44,6 +50,8 @@ public:
 	bool is_winner();
 	bool is_draw();
 	bool game_is_over();
+	int num_of_ways(int x, int y);
+	pair<int, int> best_place();
 };
 
 class Player {
@@ -64,6 +72,15 @@ protected:
 	int dimension;
 public:
 	RandomPlayer(char symbol, int dimension);
+	void get_move(int& x, int& y);
+};
+
+class AIPlayer :public Player
+{
+private:
+	Board* board;
+public:
+	AIPlayer(char symbol, Board*board);
 	void get_move(int& x, int& y);
 };
 

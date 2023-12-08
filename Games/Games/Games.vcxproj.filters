@@ -36,6 +36,9 @@
     <ClCompile Include="Five_Five_Board.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AIPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoardGame_Classes.h">

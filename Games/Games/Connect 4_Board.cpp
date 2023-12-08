@@ -106,3 +106,13 @@ bool connect4_Board::game_is_over()
 {
 	return false;
 }
+
+int connect4_Board::num_of_ways(int x, int y)
+{
+	return 0;
+}
+
+pair<int, int> connect4_Board::best_place()
+{
+	return pair<int, int>();
+}
