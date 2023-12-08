@@ -83,39 +83,40 @@ bool Pyramic_Board::game_is_over()
 	return false;
 }
 
-int Pyramic_Board::num_of_ways(int x, int y)
+int Pyramic_Board::ways_verticall(int x,int y)
 {
 	int num_ways = 0;
-	int dr[]{ 1,-1,0,0 };
-	int dc[]{ 0,0,1,-1 };
-
-	if (board[x][y] == 'W' || board[x][y] == 'X')
-		return -1;
-
-	//if (x + 2 >= n_rows && y + 2 > x * 2 + 1)
-	//	return 0;
-
+	if (x + 2 < n_rows && (!board[x][y] || board[x][y] == 'O') && (!board[x + 1][y] || board[x + 1][y] == 'O') && (!board[x + 2][y] || board[x + 2][y] == 'O'))
+		num_ways++;
 	
-	//if (x + 2 >= n_rows) return num_ways;
-	//for (int i = x; i <= x + 2; ++i)               // verticall
-	//	if (board[i][y] == 'X' || board[i][y] == 'W')
-	//	{
-	//		num_ways--;
-	//		break;
-	//	}
-	//num_ways++;
+	if (x + 1 < n_rows && (!board[x][y] || board[x][y] == 'O') && (!board[x + 1][y] || board[x + 1][y] == 'O') && (!board[x -1][y] || board[x -1][y] == 'O'))
+		num_ways++;
 
-	if (y + 2 >= x * 2 + 1) return num_ways;
-	for (int j = y; j < y +2 ; ++j)
-		if (board[x][j] == 'X' || board[x][j] == 'W')
-		{
-			num_ways--;
-			break;
-		}
-	num_ways++;
-
+	if (x < n_rows && (!board[x][y] || board[x][y] == 'O') && (!board[x - 1][y] || board[x - 1][y] == 'O') && (!board[x - 2][y] || board[x - 2][y] == 'O'))
+		num_ways++;
 
 	return num_ways;
+}
+
+int Pyramic_Board::ways_horizontall(int x, int y)
+{
+	int num_ways = 0;
+	
+	if (y + 2 <= x*2+1 && (!board[x][y] || board[x][y] == 'O') && (!board[x][y+1] || board[x][y+1] == 'O') && (!board[x][y+2] || board[x][y+2] == 'O'))
+		num_ways++;
+
+	if (y + 1 <= x * 2 + 1 && (!board[x][y] || board[x][y] == 'O') && (!board[x][y + 1] || board[x][y + 1] == 'O') && (!board[x][y -1] || board[x][y - 1] == 'O'))
+		num_ways++;
+
+	if (y <= x * 2 + 1 && (!board[x][y] || board[x][y] == 'O') && (!board[x][y - 1] || board[x][y - 1] == 'O') && (!board[x][y - 2] || board[x][y - 2] == 'O'))
+		num_ways++;
+
+	return 0;
+}
+
+int Pyramic_Board::num_of_ways(int x, int y)
+{
+	return ways_horizontall(x, y);
 }
 
 pair<int, int> Pyramic_Board::best_place()

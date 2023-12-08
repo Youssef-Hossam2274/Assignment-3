@@ -26,6 +26,8 @@ public:
 	bool is_winner();
 	bool is_draw();
 	bool game_is_over();
+	int ways_verticall(int x,int y);
+	int ways_horizontall(int x, int y);
 	int num_of_ways(int x, int y);
 	pair<int, int> best_place();
 };
