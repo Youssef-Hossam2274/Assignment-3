@@ -38,18 +38,12 @@ void Five_Five_Board::display_board() {
 
 
 bool Five_Five_Board::is_winner() {
-    int num_moves = 0;
-    for (int i = 0; i < 5; i++)
-        for (int j = 0; j < 5; j++)
-            if (board[i][j] != 0)
-                num_moves++;
-    if (num_moves != 24)
+    if (n_moves != 24)
         return false;
-
     map<char, int> symbol_points;
-    for (int i = 0; i <= 2; ++i) {
-        for (int j = 0; j <= 2; ++j) {
-            if (board[i][j] != 0) {
+    for (int i = 0; i < 5; ++i) {
+        for (int j = 0; j < 5; ++j) {
+            if (board[i][j] != 0 && i <=2 && j <= 2) {
                 if (board[i][j] == board[i][j + 1] && board[i][j + 1] == board[i][j + 2])
                     symbol_points[board[i][j]]++;
 
@@ -75,7 +69,6 @@ bool Five_Five_Board::is_winner() {
     else
         cout << "player with symbol " << it2->first << " wins\n";
     return false;
-
 }
 
 bool Five_Five_Board::is_draw() {
