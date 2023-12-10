@@ -1,5 +1,10 @@
 #pragma once
 #include"Connect_four_game.h"
+<<<<<<< HEAD
+=======
+#include"Five_Five_Board.h"
+#include""
+>>>>>>> 58ba7eba0b8caee9869682f199e358ffa6475b17
 #include"MyForm.h"
 
 namespace GamesGUI {
@@ -87,8 +92,13 @@ namespace GamesGUI {
         void game2Button_Click(System::Object^ sender, System::EventArgs^ e)
         {
             // Create and show the Game 2 window
+<<<<<<< HEAD
             /*Game2Form^ game2Form = gcnew Game2Form();
             game2Form->Show();*/
+=======
+            Game2Form^ game2Form = gcnew Game2Form();
+            game2Form->Show();
+>>>>>>> 58ba7eba0b8caee9869682f199e358ffa6475b17
         }
 
         void game3Button_Click(System::Object^ sender, System::EventArgs^ e)
