@@ -37,7 +37,7 @@ void Five_Five_Board::display_board() {
 }
 
 
-bool Five_Five_Board::is_winner() {
+int Five_Five_Board::is_winner() {
     if (n_moves != 24)
         return false;
     map<char, int> symbol_points;
@@ -81,11 +81,8 @@ bool Five_Five_Board::game_is_over() {
     return false;
 }
 
-
-int Five_Five_Board::num_of_ways(int x, int y) {
+int Five_Five_Board::minimax(int& x, int& y, int depth, bool isMaximizing, bool firstTime)
+{
     return 0;
 }
 
-pair<int, int> Five_Five_Board::best_place() {
-    return pair<int, int>();
-}

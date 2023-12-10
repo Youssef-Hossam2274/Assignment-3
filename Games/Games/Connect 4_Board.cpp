@@ -62,7 +62,7 @@ void connect4_Board::display_board()
 	cout << '\n';
 }
 
-bool connect4_Board::is_winner()
+int connect4_Board::is_winner()
 {
 	// diagonal with positive slope handling
 	for (int i = n_rows - 1; i >= 0 ; i--) { 
@@ -120,12 +120,7 @@ bool connect4_Board::game_is_over()
 	return false;
 }
 
-int connect4_Board::num_of_ways(int x, int y)
+int connect4_Board::minimax(int& x, int& y, int depth, bool isMaximizing, bool firstTime)
 {
 	return 0;
-}
-
-pair<int, int> connect4_Board::best_place()
-{
-	return pair<int, int>();
 }

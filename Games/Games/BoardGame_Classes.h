@@ -10,12 +10,25 @@ protected:
 public:
 
 	virtual bool update_board(int x, int y, char symbol) = 0;
-	virtual bool is_winner() = 0;
+	virtual int is_winner() = 0;
 	virtual bool is_draw() = 0;
 	virtual void display_board() = 0;
 	virtual bool game_is_over() = 0;
-	virtual int num_of_ways(int x, int y) = 0;
-	virtual pair<int, int> best_place() = 0;
+	virtual int minimax(int &x, int &y, int depth, bool isMaximizing, bool firstTime = true) = 0;
+};
+
+class X_O_Board :public Board {
+private:
+	bool haveTheSameValueAndNotEmpty(char x, char y, char z);
+	int checkWinner();
+public:
+	X_O_Board();
+	bool update_board(int x, int y, char mark);
+	void display_board();
+	int is_winner();
+	bool is_draw();
+	bool game_is_over();
+	int minimax(int& x, int& y, int depth, bool isMaximizing, bool firstTime = true);
 };
 
 class Pyramic_Board :public Board {
@@ -23,13 +36,10 @@ public:
 	Pyramic_Board();
 	bool update_board(int x, int y, char mark);
 	void display_board();
-	bool is_winner();
+	int is_winner();
 	bool is_draw();
 	bool game_is_over();
-	int ways_verticall(int x,int y);
-	int ways_horizontall(int x, int y);
-	int num_of_ways(int x, int y);
-	pair<int, int> best_place();
+	int minimax(int &x, int &y, int depth, bool isMaximizing, bool firstTime = true);
 };
 
 class connect4_Board :public Board {
@@ -37,11 +47,10 @@ public:
 	connect4_Board();
 	bool update_board(int x, int y, char mark);
 	void display_board();
-	bool is_winner();
+	int is_winner();
 	bool is_draw();
 	bool game_is_over();
-	int num_of_ways(int x, int y);
-	pair<int, int> best_place();
+	int minimax(int &x, int &y, int depth, bool isMaximizing, bool firstTime = true);
 };
 
 class Five_Five_Board :public Board {
@@ -49,11 +58,10 @@ public:
 	Five_Five_Board();
 	bool update_board(int x, int y, char mark);
 	void display_board();
-	bool is_winner();
+	int is_winner();
 	bool is_draw();
 	bool game_is_over();
-	int num_of_ways(int x, int y);
-	pair<int, int> best_place();
+	int minimax(int& x, int& y, int depth, bool isMaximizing, bool firstTime = true);
 };
 
 class Player {
@@ -92,8 +100,7 @@ class GameManager {
 private:
 	Board* boardPtr;
 	Player* players[2];
-	int x = -1, y = -1;
 public:
-	GameManager(Board*, Player* playerPtr[2], bool flag);
+	GameManager(Board*, Player* playerPtr[2]);
 	void run();
 };

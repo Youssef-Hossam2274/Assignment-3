@@ -135,6 +135,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Pyramic_Board.cpp" />
     <ClCompile Include="RandomPlayer.cpp" />
+    <ClCompile Include="X_O_Board.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoardGame_Classes.h" />
