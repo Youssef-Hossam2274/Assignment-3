@@ -1,0 +1,5 @@
+C:\Users\hp\My-Github\Assignment-3\GUI\Games_GUI\x64\Debug\Games_GUI.vcxproj.AssemblyReference.cache
+C:\Users\hp\My-Github\Assignment-3\GUI\Games_GUI\x64\Debug\GamesGUI.exe
+C:\Users\hp\My-Github\Assignment-3\GUI\Games_GUI\x64\Debug\GamesGUI.MyForm.resources
+C:\Users\hp\My-Github\Assignment-3\GUI\Games_GUI\x64\Debug\Games_GUI.vcxproj.GenerateResource.cache
+C:\Users\hp\My-Github\Assignment-3\GUI\Games_GUI\x64\Debug\GamesGUI.Connect_four_game.resources
