@@ -15,16 +15,13 @@ void GameManager::run() {
     while (!boardPtr->game_is_over()) {
         for (int i : {0, 1}) {
             players[i]->get_move(x, y);
-            if (i == 1)
-                boardPtr->minimax(x, y, 100, false);
             while (!boardPtr->update_board(x, y, players[i]->get_symbol())) {
                 players[i]->get_move(x, y);
             }
             boardPtr->display_board();
 
-            if (boardPtr->is_winner() == -2 || boardPtr->is_winner() == 2) {
+            if (boardPtr->check_status() == -2 || boardPtr->check_status() == 2) {
                 cout << players[i]->to_string() << " wins\n";
-                cout << boardPtr->is_winner() << '\n';
                 return;
             }
             

@@ -62,7 +62,7 @@ void connect4_Board::display_board()
 	cout << '\n';
 }
 
-int connect4_Board::is_winner()
+int connect4_Board::check_status()
 {
 	// diagonal with positive slope handling
 	for (int i = n_rows - 1; i >= 0 ; i--) { 
@@ -109,7 +109,7 @@ int connect4_Board::is_winner()
 
 bool connect4_Board::is_draw()
 {
-	return (n_moves == 42 && !is_winner());
+	return (n_moves == 42);
 	return false;
 
 	return false;

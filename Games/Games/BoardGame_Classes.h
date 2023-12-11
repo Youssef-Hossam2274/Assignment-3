@@ -10,7 +10,7 @@ protected:
 public:
 
 	virtual bool update_board(int x, int y, char symbol) = 0;
-	virtual int is_winner() = 0;
+	virtual int check_status() = 0;
 	virtual bool is_draw() = 0;
 	virtual void display_board() = 0;
 	virtual bool game_is_over() = 0;
@@ -20,23 +20,24 @@ public:
 class X_O_Board :public Board {
 private:
 	bool haveTheSameValueAndNotEmpty(char x, char y, char z);
-	int checkWinner();
 public:
 	X_O_Board();
 	bool update_board(int x, int y, char mark);
 	void display_board();
-	int is_winner();
+	int check_status();
 	bool is_draw();
 	bool game_is_over();
 	int minimax(int& x, int& y, int depth, bool isMaximizing, bool firstTime = true);
 };
 
 class Pyramic_Board :public Board {
+private:
+	bool equal (char x, char y, char z);
 public:
 	Pyramic_Board();
 	bool update_board(int x, int y, char mark);
 	void display_board();
-	int is_winner();
+	int check_status();
 	bool is_draw();
 	bool game_is_over();
 	int minimax(int &x, int &y, int depth, bool isMaximizing, bool firstTime = true);
@@ -47,7 +48,7 @@ public:
 	connect4_Board();
 	bool update_board(int x, int y, char mark);
 	void display_board();
-	int is_winner();
+	int check_status();
 	bool is_draw();
 	bool game_is_over();
 	int minimax(int &x, int &y, int depth, bool isMaximizing, bool firstTime = true);
@@ -58,7 +59,7 @@ public:
 	Five_Five_Board();
 	bool update_board(int x, int y, char mark);
 	void display_board();
-	int is_winner();
+	int check_status();
 	bool is_draw();
 	bool game_is_over();
 	int minimax(int& x, int& y, int depth, bool isMaximizing, bool firstTime = true);

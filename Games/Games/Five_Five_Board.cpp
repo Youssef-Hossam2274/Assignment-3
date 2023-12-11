@@ -37,7 +37,7 @@ void Five_Five_Board::display_board() {
 }
 
 
-int Five_Five_Board::is_winner() {
+int Five_Five_Board::check_status() {
     if (n_moves != 24)
         return false;
     map<char, int> symbol_points;

@@ -1,6 +1,14 @@
 #include <iostream>
 #include "BoardGame_Classes.h"
 
+bool Pyramic_Board::equal(char x, char y, char z)
+{
+	if (x == y && x == z && x != 0) {
+		return true;
+	}
+	return false;
+}
+
 Pyramic_Board::Pyramic_Board()
 {
 	n_rows = 3;
@@ -17,13 +25,14 @@ Pyramic_Board::Pyramic_Board()
 			board[i][j + k] = 0;
 
 	//board[0][2] = 'O';
-	//board[1][1] = 'X';
-	////board[1][2] = 'O';
-	//board[1][3] = 'X';
+	//board[1][3] = 'O';
 	//board[2][0] = 'O';
-
-
-
+	//board[2][1] = 'O';
+	//board[1][2] = 'X';
+	//board[1][1] = 'X';
+	//board[2][4] = 'X';
+	//board[2][2] = 'X';
+	//board[2][3] = 'X';
 }
 
 bool Pyramic_Board::update_board(int x, int y, char mark)
@@ -58,49 +67,44 @@ void Pyramic_Board::display_board()
 	 }
 }
 
-int Pyramic_Board::is_winner()
+int Pyramic_Board::check_status()
 {
-	// 2: x win
-	// -2 o win
-	// 0 Tie
+	//  2: X winner
+	// -2: O winner
+	//  0: Tie
+	//  1: No winner
 
-	if (board[0][2] && (board[0][2] & board[1][2] & board[2][2]) == board[0][2] && board[0][2] == 'X')// handle verticall
-		return 2;
-	
-	if (board[0][2] && (board[0][2] & board[1][3] & board[2][3]) == board[0][2] && board[0][2] == 'X' || // handle diag
-		board[0][2] && (board[0][2] & board[1][1] & board[2][0]) == board[0][2] && board[0][2] == 'X')
-		return 2;
+	// for row
+	for (int i = 0; i < n_rows; ++i)
+		for (int j = 0; j < 3; ++j)
+			if (equal(board[i][j], board[i][j + 1], board[i][j + 2]))
+				return board[i][j] == 'X' ? 2 : -2;
 
-	if (board[1][1] && (board[1][1] & board[1][2] & board[1][3]) == board[1][1] && board[1][1] == 'X' ||
-		board[2][0] && (board[2][0] & board[2][1] & board[2][2]) == board[2][0] && board[2][0] == 'X' ||
-		board[2][1] && (board[2][1] & board[2][2] & board[2][3]) == board[2][1] && board[2][1] == 'X' ||
-		board[2][2] && (board[2][2] & board[2][3] & board[2][4]) == board[2][2] && board[2][2] == 'X'
-		)
-		return 2;
+	// for col
+	if (equal(board[0][2], board[1][2], board[2][2]))
+		return board[0][2] == 'X' ? 2 : -2;
 
-	if (board[0][2] && (board[0][2] & board[1][2] & board[2][2]) == board[0][2] && board[0][2] == 'O')// handle verticall
-		return -2;																				   
-																								   
-	if (board[0][2] && (board[0][2] & board[1][3] & board[2][3]) == board[0][2] && board[0][2] == 'O' || // handle diag
-		board[0][2] && (board[0][2] & board[1][1] & board[2][0]) == board[0][2] && board[0][2] == 'O')
-		return -2;																				   
-																								   
-	if (board[1][1] && (board[1][1] & board[1][2] & board[1][3]) == board[1][1] && board[1][1] == 'O' ||
-		board[2][0] && (board[2][0] & board[2][1] & board[2][2]) == board[2][0] && board[2][0] == 'O' ||
-		board[2][1] && (board[2][1] & board[2][2] & board[2][3]) == board[2][1] && board[2][1] == 'O' ||
-		board[2][2] && (board[2][2] & board[2][3] & board[2][4]) == board[2][2] && board[2][2] == 'O'
-		)
-		return -2;
+	// for diag
+	if (equal(board[0][2], board[1][1], board[2][0]) || equal(board[0][2], board[1][3], board[2][4]))
+		return board[0][2] == 'X' ? 2 : -2;
 
-	if (is_draw())
+	// For Tie Case
+	bool tie = true;
+	for (int i = 0; i < n_rows; i++) {
+		for (int j = 0; j < n_cols; j++) {
+			if (board[i][j] == 0) {
+				tie = false;
+			}
+		}
+	}
+	if (tie)
 		return 0;
-
 	return 1;
 }
 
 bool Pyramic_Board::is_draw()
 {
-	return (n_moves == 9);
+	return (check_status() == 0);
 }
 
 bool Pyramic_Board::game_is_over()
@@ -111,68 +115,53 @@ bool Pyramic_Board::game_is_over()
 
 int Pyramic_Board::minimax(int &x, int &y,int depth, bool isMaximizing, bool firstTime)
 {
-	int result = is_winner();
-	if (result != 1)
+	int result = check_status();
+	if (depth == 0 || result != 1)
 		return result;
 
 	int max_score = INT_MIN, min_score = INT_MAX;
-	int resX, resY;
+	int finalI, finalJ;
 
-	if (isMaximizing)                 // X turn
+	for (int i = 0; i < n_rows; i++)
 	{
-		for (int i = 0; i < n_rows; ++i)
+		for (int j = 0; j < n_cols; j++)
 		{
-			for (int j = 0; j < n_cols; ++j)
+			if (board[i][j] == 0)
 			{
-				if (board[i][j] == 0)                // this place is empty
+				if (isMaximizing)
 				{
 					board[i][j] = 'X';
-					//display_board();
 					int score = minimax(x, y, depth - 1, false, false);
 					board[i][j] = 0;
-					if (max_score < score)
+					if (score > max_score)
 					{
 						max_score = score;
-						resX = i; resY = j;
+						finalI = i;
+						finalJ = j;
 					}
-					//cout << "max score: " << max_score << '\n';
+					if (firstTime)
+						cout << "score," << i << "," << j << ": " << score << "\n";
 				}
-			}
-		}
-		if (firstTime)
-		{
-			x = resX;
-			y = resY;
-		}
-		return max_score;
-	}
-
-	else
-	{
-		for (int i = 0; i < n_rows; ++i)
-		{
-			for (int j = 0; j < n_cols; ++j)
-			{
-				if (board[i][j] == 0)                // this place is empty
+				else
 				{
 					board[i][j] = 'O';
-					//display_board();
 					int score = minimax(x, y, depth - 1, true, false);
 					board[i][j] = 0;
-					if (min_score > score)
+					if (score < min_score)
 					{
 						min_score = score;
-						resX = i; resY = j;
+						finalI = i;
+						finalJ = j;
 					}
+					if (firstTime)
+						cout << "score," << i << "," << j << ": " << score << "\n";
 				}
+
 			}
 		}
-		if (firstTime)
-		{
-			x = resX;
-			y = resY;
-		}
-		return min_score;
 	}
 
+	if (firstTime)
+		x = finalI, y = finalJ;
+	return (isMaximizing ? max_score : min_score);
 }
