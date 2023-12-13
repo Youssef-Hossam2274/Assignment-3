@@ -39,11 +39,11 @@ void Five_Five_Board::display_board() {
 
 int Five_Five_Board::check_status() {
     if (n_moves != 24)
-        return false;
+        return 1;
     map<char, int> symbol_points;
     for (int i = 0; i < 5; ++i) {
         for (int j = 0; j < 5; ++j) {
-            if (board[i][j] != 0 && i <=2 && j <= 2) {
+            if (board[i][j] != 0 && i <= 2 && j <= 2) {
                 if (board[i][j] == board[i][j + 1] && board[i][j + 1] == board[i][j + 2])
                     symbol_points[board[i][j]]++;
 
@@ -62,13 +62,12 @@ int Five_Five_Board::check_status() {
     auto it1 = symbol_points.begin();
     auto it2 = ++symbol_points.begin();
     if (it1->second == it2->second)
-        cout << "Draw!\n";
+        return 0;
     else if (it1->second > it2->second)
-        cout << "player with symbol " << it1->first << " wins\n";
+        return (it1->first == 'X') ? 2 : -2;
 
     else
-        cout << "player with symbol " << it2->first << " wins\n";
-    return false;
+        return (it2->first == 'X') ? 2 : -2;
 }
 
 bool Five_Five_Board::is_draw() {
@@ -81,8 +80,6 @@ bool Five_Five_Board::game_is_over() {
     return false;
 }
 
-int Five_Five_Board::minimax(int& x, int& y, int depth, bool isMaximizing, bool firstTime)
-{
+int Five_Five_Board::minimax(int &x, int &y, int depth, bool isMaximizing, bool firstTime) {
     return 0;
 }
-
