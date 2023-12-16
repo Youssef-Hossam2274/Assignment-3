@@ -24,47 +24,13 @@ Pyramic_Board::Pyramic_Board()
 		for (int k = 0; k < (i * 2 + 1); ++k)
 			board[i][j + k] = 0;
 
+	// test 1
+	//board[1][1] = 'X';
+	//board[1][2] = 'X';
+	//board[2][4] = 'X';
+	//board[2][0] = 'O';
 	//board[0][2] = 'O';
 	//board[1][3] = 'O';
-	//board[2][0] = 'O';
-	//board[2][1] = 'O';
-	//board[1][2] = 'X';
-	//board[1][1] = 'X';
-	//board[2][4] = 'X';
-	//board[2][2] = 'X';
-	//board[2][3] = 'X';
-}
-
-bool Pyramic_Board::update_board(int x, int y, char mark)
-{
-	if (x < n_rows && y < n_cols && board[x][y] == 0)
-	{
-		board[x][y] = toupper(mark);
-		n_moves++;
-		return true;
-	}
-	return false;
-}
-
-void Pyramic_Board::display_board()
-{
-	 cout << '\n';
-	 for (int i = 0; i < n_rows; ++i)
-	 {
-		 int j = 0;
-		 int spaces = n_rows - i - 1;
-		 while (spaces--)
-			cout << "       ", j++;
-		 cout << "|";
-		 for (; j < n_cols && board[i][j] != 'W'; ++j)
-		 {
-			if (board[i][j] == 0)
-				cout << "(" << i << ", " << j << ")" << "|";
-			else
-				cout << "  " << board[i][j] << "   " << "|";
-		 }
-		cout << '\n';
-	 }
 }
 
 int Pyramic_Board::check_status()
@@ -102,6 +68,47 @@ int Pyramic_Board::check_status()
 	return 1;
 }
 
+bool Pyramic_Board::update_board(int x, int y, char mark)
+{
+	if (x < n_rows && y < n_cols && board[x][y] == 0)
+	{
+		board[x][y] = toupper(mark);
+		n_moves++;
+		return true;
+	}
+	return false;
+}
+
+bool Pyramic_Board::is_winner()
+{
+	int res = check_status();
+	if (res == 2 || res == -2)
+		return true;
+
+	return false;
+}
+
+void Pyramic_Board::display_board()
+{
+	 cout << '\n';
+	 for (int i = 0; i < n_rows; ++i)
+	 {
+		 int j = 0;
+		 int spaces = n_rows - i - 1;
+		 while (spaces--)
+			cout << "       ", j++;
+		 cout << "|";
+		 for (; j < n_cols && board[i][j] != 'W'; ++j)
+		 {
+			if (board[i][j] == 0)
+				cout << "(" << i << ", " << j << ")" << "|";
+			else
+				cout << "  " << board[i][j] << "   " << "|";
+		 }
+		cout << '\n';
+	 }
+}
+
 bool Pyramic_Board::is_draw()
 {
 	return (check_status() == 0);
@@ -112,11 +119,10 @@ bool Pyramic_Board::game_is_over()
 	return false;
 }
 
-
-int Pyramic_Board::minimax(int &x, int &y,int depth, bool isMaximizing, bool firstTime)
+int Pyramic_Board::minimax(int &x, int &y, bool isMaximizing, bool firstTime)
 {
 	int result = check_status();
-	if (depth == 0 || result != 1)
+	if (result != 1)
 		return result;
 
 	int max_score = INT_MIN, min_score = INT_MAX;
@@ -131,30 +137,30 @@ int Pyramic_Board::minimax(int &x, int &y,int depth, bool isMaximizing, bool fir
 				if (isMaximizing)
 				{
 					board[i][j] = 'X';
-					int score = minimax(x, y, depth - 1, false, false);
+					int score = minimax(x, y, false, false);
 					board[i][j] = 0;
-					if (score > max_score)
+					if (score >= max_score)
 					{
 						max_score = score;
 						finalI = i;
 						finalJ = j;
 					}
 					if (firstTime)
-						cout << "score," << i << "," << j << ": " << score << "\n";
+						cout << "in " << i << ", " << j << (score == 2 ? "X win" : (score == -2) ? "O win" : " Draw") << '\n';
 				}
 				else
 				{
 					board[i][j] = 'O';
-					int score = minimax(x, y, depth - 1, true, false);
+					int score = minimax(x, y, true, false);
 					board[i][j] = 0;
-					if (score < min_score)
+					if (score <= min_score)
 					{
 						min_score = score;
 						finalI = i;
 						finalJ = j;
 					}
 					if (firstTime)
-						cout << "score," << i << "," << j << ": " << score << "\n";
+						cout << "in " << i << ", " << j << (score == 2 ? "X win" : (score == -2) ? "O win" : " Draw") << '\n';
 				}
 
 			}

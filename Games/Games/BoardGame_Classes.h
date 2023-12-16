@@ -10,68 +10,75 @@ protected:
 public:
 
 	virtual bool update_board(int x, int y, char symbol) = 0;
-	virtual int check_status() = 0;
+	virtual bool is_winner() = 0;
 	virtual bool is_draw() = 0;
 	virtual void display_board() = 0;
 	virtual bool game_is_over() = 0;
-	virtual int minimax(int &x, int &y, int depth, bool isMaximizing, bool firstTime = true) = 0;
+	virtual int minimax(int &x, int &y, bool isMaximizing, bool firstTime = true) = 0;
 };
 
 class X_O_Board :public Board {
 private:
-	bool haveTheSameValueAndNotEmpty(char x, char y, char z);
+	bool equal(char x, char y, char z);
+	int check_status();
 public:
 	X_O_Board();
 	bool update_board(int x, int y, char mark);
+	bool is_winner();
 	void display_board();
-	int check_status();
 	bool is_draw();
 	bool game_is_over();
-	int minimax(int& x, int& y, int depth, bool isMaximizing, bool firstTime = true);
+	int minimax(int& x, int& y, bool isMaximizing, bool firstTime = true);
 };
 
 class Pyramic_Board :public Board {
 private:
 	bool equal (char x, char y, char z);
+	int check_status();
 public:
 	Pyramic_Board();
 	bool update_board(int x, int y, char mark);
+	bool is_winner();
 	void display_board();
-	int check_status();
 	bool is_draw();
 	bool game_is_over();
-	int minimax(int &x, int &y, int depth, bool isMaximizing, bool firstTime = true);
+	int minimax(int &x, int &y, bool isMaximizing, bool firstTime = true);
 };
 
 class connect4_Board :public Board {
+private:
+	int check_status();
 public:
 	connect4_Board();
 	bool update_board(int x, int y, char mark);
+	bool is_winner();
 	void display_board();
-	int check_status();
 	bool is_draw();
 	bool game_is_over();
-	int minimax(int &x, int &y, int depth, bool isMaximizing, bool firstTime = true);
+	int minimax(int &x, int &y, bool isMaximizing, bool firstTime = true);
 };
 
 class Five_Five_Board :public Board {
+private:
+	int check_status();
 public:
 	Five_Five_Board();
 	bool update_board(int x, int y, char mark);
+	bool is_winner();
 	void display_board();
-	int check_status();
 	bool is_draw();
 	bool game_is_over();
-	int minimax(int& x, int& y, int depth, bool isMaximizing, bool firstTime = true);
+	int minimax(int& x, int& y, bool isMaximizing, bool firstTime = true);
 };
 
 class Player {
 protected:
 	string name;
 	char symbol;
+	Board* board;
 public:
 	Player(char symbol);
-	Player(int order, char symbol);
+	Player(int order, char symbol, Board* board);
 	virtual void get_move(int& x, int& y);
 	string to_string();
 	char get_symbol();

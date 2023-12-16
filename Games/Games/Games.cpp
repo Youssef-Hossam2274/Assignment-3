@@ -1,11 +1,6 @@
 ﻿#include <iostream>
 #include "BoardGame_Classes.h"
 
-void TestAI_1()
-{
-   
-}
-
 void play()
 {
     Board* board = nullptr;
@@ -22,7 +17,6 @@ void play()
     int Game_choice;
     cin >> Game_choice;
 
-    players[0] = new Player(1, 'X');
     if (Game_choice == 1)
         board = new Pyramic_Board();
     else if (Game_choice == 2)
@@ -42,10 +36,11 @@ void play()
     cin >> choice;
     cout << "\n";
 
+    players[0] = new Player(1, 'X', board);
     if (choice == 1)
         players[1] = new RandomPlayer('O', 3);
     else if (choice == 2)
-        players[1] = new Player(2, 'O');
+        players[1] = new Player(2, 'O', board);
     else if (choice == 3)
         players[1] = new AIPlayer('O', board);
 

@@ -9,5 +9,5 @@ AIPlayer::AIPlayer(char symbol, Board* board):Player(symbol), board(board)
 }
 void AIPlayer::get_move(int& x, int& y)
 {
-	board->minimax(x, y, 1000, false, true);
+	board->minimax(x, y, false, true);
 }
