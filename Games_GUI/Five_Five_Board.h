@@ -74,6 +74,6 @@ namespace GamesGUI {
 #pragma endregion
 	private: System::Void Five_Five_Board_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
-	
+
 	};
 }

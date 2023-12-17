@@ -13,6 +13,6 @@ E:\study\OOP\Assignments\Assignment #3\Assignment-3شش\Games_GUI\x64\Debug\Game
 E:\study\OOP\Assignments\Assignment #3\Assignment-3شش\Games_GUI\x64\Debug\GamesGUI.Connect_four_game.resources
 E:\study\OOP\Assignments\Assignment #3\Assignment-3شش\Games_GUI\x64\Debug\GamesGUI.Five_Five_Board.resources
 E:\study\OOP\Assignments\Assignment #3\Assignment-3شش\Games_GUI\x64\Debug\GamesGUI.MyForm.resources
+E:\study\OOP\Assignments\Assignment #3\Assignment-3شش\Games_GUI\x64\Debug\GamesGUI.Pyramic_Board.resources
 E:\study\OOP\Assignments\Assignment #3\Assignment-3شش\Games_GUI\x64\Debug\Games_GUI.vcxproj.GenerateResource.cache
 E:\study\OOP\Assignments\Assignment #3\Assignment-3شش\Games_GUI\x64\Debug\GamesGUI.exe
-E:\study\OOP\Assignments\Assignment #3\Assignment-3شش\Games_GUI\x64\Debug\GamesGUI.Pyramic_Board.resources

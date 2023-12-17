@@ -18,16 +18,16 @@ namespace GamesGUI {
 		Connect_Four_Board(void)
 		{
 			InitializeComponent();
-			
-			
-				this->SuspendLayout();
 
-				// Connect four window 
 
-				this->ClientSize = System::Drawing::Size(920, 455);
-				this->Name = L"Connnect FOUR window";
-				this->Text = L"Connnect FOUR";
-				this->ResumeLayout(false);
+			this->SuspendLayout();
+
+			// Connect four window 
+
+			this->ClientSize = System::Drawing::Size(920, 455);
+			this->Name = L"Connnect FOUR window";
+			this->Text = L"Connnect FOUR";
+			this->ResumeLayout(false);
 		}
 
 	protected:
@@ -46,7 +46,7 @@ namespace GamesGUI {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>

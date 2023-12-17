@@ -17,10 +17,10 @@ Assembly System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=
 	hash=None, flags=None
 Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
 	hash=None, flags=None
-Class GamesGUI.Connect_Four_Board: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+Class GamesGUI.Five_Five_Board: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
-Class GamesGUI.Five_Five_Board: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+Class GamesGUI.Connect_Four_Board: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
 Class GamesGUI.Pyramic_Board: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit

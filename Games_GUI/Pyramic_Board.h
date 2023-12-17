@@ -60,16 +60,16 @@ namespace GamesGUI {
 	private: System::Windows::Forms::CheckBox^ checkBox1;
 
 
-	System::String^ player1name = "";
-	System::String^ player2name = "";
-	bool is_computer;
-	bool x_turn;
-	array<char>^ charGrid = gcnew array<char>(9);
-	//void update_turn()
-	//{
-	//	x_turn = !x_turn;
-	//	label5->Text = "Turn: " + (x_turn ? "X" : "O");
-	//}
+		   System::String^ player1name = "";
+		   System::String^ player2name = "";
+		   bool is_computer;
+		   bool x_turn;
+		   array<char>^ charGrid = gcnew array<char>(9);
+		   void update_turn()
+		   {
+		   	x_turn = !x_turn;
+		   	label5->Text = "Turn: " + (x_turn ? "X" : "O");
+		   }
 
 
 
@@ -78,7 +78,7 @@ namespace GamesGUI {
 
 	private:
 
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
@@ -334,6 +334,7 @@ namespace GamesGUI {
 			label1->Hide();
 			textBox1->Hide();
 			checkBox1->Hide();
+			label5->Show();
 		}
 		else
 		{
@@ -342,6 +343,7 @@ namespace GamesGUI {
 			textBox1->Hide();
 			label1->Hide();
 			checkBox1->Hide();
+			label5->Show();
 		}
 	}
 	private: System::Void button11_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -358,9 +360,9 @@ namespace GamesGUI {
 		{
 			if (x_turn)
 				button2->Text = "X";
-			else 
+			else
 				button2->Text = "O";
-			//update_turn();
+			update_turn();
 		}
 	}
 	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -370,7 +372,7 @@ namespace GamesGUI {
 				button4->Text = "X";
 			else
 				button4->Text = "O";
-			//update_turn();
+			update_turn();
 		}
 	}
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -380,7 +382,7 @@ namespace GamesGUI {
 				button3->Text = "X";
 			else
 				button3->Text = "O";
-			//update_turn();
+			update_turn();
 		}
 
 	}
@@ -391,7 +393,7 @@ namespace GamesGUI {
 				button5->Text = "X";
 			else
 				button5->Text = "O";
-			//update_turn();
+			update_turn();
 		}
 
 	}
@@ -402,7 +404,7 @@ namespace GamesGUI {
 				button9->Text = "X";
 			else
 				button9->Text = "O";
-			//update_turn();
+			update_turn();
 		}
 	}
 	private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -412,7 +414,7 @@ namespace GamesGUI {
 				button6->Text = "X";
 			else
 				button6->Text = "O";
-			//update_turn();
+			update_turn();
 		};
 
 	}
@@ -423,7 +425,7 @@ namespace GamesGUI {
 				button7->Text = "X";
 			else
 				button7->Text = "O";
-			//update_turn();
+			update_turn();
 		}
 	}
 	private: System::Void button8_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -433,7 +435,7 @@ namespace GamesGUI {
 				button8->Text = "X";
 			else
 				button8->Text = "O";
-			//update_turn();
+			update_turn();
 		}
 	}
 	private: System::Void button10_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -443,8 +445,8 @@ namespace GamesGUI {
 				button10->Text = "X";
 			else
 				button10->Text = "O";
-			//update_turn();
+			update_turn();
 		}
 	}
-};
+	};
 }
