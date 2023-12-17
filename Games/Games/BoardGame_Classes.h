@@ -60,7 +60,10 @@ public:
 
 class Five_Five_Board :public Board {
 private:
-	int check_status();
+    void update_points();
+        int x_points = 0;
+        int o_points = 0;
+
 public:
 	Five_Five_Board();
 	bool update_board(int x, int y, char mark);

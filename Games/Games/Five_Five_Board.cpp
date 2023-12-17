@@ -13,79 +13,51 @@ Five_Five_Board::Five_Five_Board() {
     }
 }
 
-bool Five_Five_Board::update_board(int x, int y, char mark) {
-    if (x < n_rows && y < n_cols && board[x][y] == 0) {
-        board[x][y] = toupper(mark);
-        n_moves++;
-        return true;
-    }
-    return false;
-}
-
-int Five_Five_Board::check_status() {
-    if (n_moves != 24)
-        return 1;
-    map<char, int> symbol_points;
+void Five_Five_Board::update_points() {
+    x_points = 0;
+    o_points = 0;
     for (int i = 0; i < 5; ++i) {
         for (int j = 0; j < 5; ++j) {
-            if (board[i][j] != 0 && i <= 2 && j <= 2) {
-                if (board[i][j] == board[i][j + 1] && board[i][j + 1] == board[i][j + 2])
-                    symbol_points[board[i][j]]++;
+            //horizontal
+            if (j <= 2 && board[i][j] != 0 && board[i][j] == board[i][j + 1] &&
+                board[i][j + 1] == board[i][j + 2]) {
+                (board[i][j] == 'X') ? x_points++ : o_points++;
+            }
+            // vertical
+            if (i <= 2 && board[i][j] != 0 && board[i][j] == board[i + 1][j] &&
+                board[i + 1][j] == board[i + 2][j]) {
+                (board[i][j] == 'X') ? x_points++ : o_points++;
+            }
 
-                if (board[i][j] == board[i + 1][j] && board[i + 1][j] == board[i + 2][j])
-                    symbol_points[board[i][j]]++;
-
-
-                if (board[i][j] == board[i + 1][j + 1] && board[i + 1][j + 1] == board[i + 2][j + 2])
-                    symbol_points[board[i + 1][j + 1]]++;
-
-                if (board[i][j + 2] == board[i + 1][j + 1] && board[i + 1][j + 1] == board[i + 2][j])
-                    symbol_points[board[i + 1][j + 1]]++;
+            // Diagonal
+            if (i <= 2 && j <= 2) {
+                if (board[i][j] != 0 && board[i][j] == board[i + 1][j + 1] &&
+                    board[i + 1][j + 1] == board[i + 2][j + 2]) {
+                    (board[i][j] == 'X') ? x_points++ : o_points++;
+                }
+                if (board[i][j + 2] != 0 && board[i][j + 2] == board[i + 1][j + 1] &&
+                    board[i + 1][j + 1] == board[i + 2][j]) {
+                    (board[i][j + 2] == 'X') ? x_points++ : o_points++;
+                }
             }
         }
     }
-    auto it1 = symbol_points.begin();
-    auto it2 = ++symbol_points.begin();
-    if (it1->second == it2->second)
-        return 0;
-    else if (it1->second > it2->second)
-        return (it1->first == 'X') ? 2 : -2;
-
-    else
-        return (it2->first == 'X') ? 2 : -2;
 }
 
 bool Five_Five_Board::is_winner() {
-    if (n_moves != 24)
+    update_points();
+    if (n_moves != 24) {
+        cout << "X has points -> " << x_points << endl;
+        cout << "Y has points -> " << o_points << endl;
         return false;
-    map<char, int> symbol_points;
-    for (int i = 0; i < 5; ++i) {
-        for (int j = 0; j < 5; ++j) {
-            if (board[i][j] != 0 && i <=2 && j <= 2) {
-                if (board[i][j] == board[i][j + 1] && board[i][j + 1] == board[i][j + 2])
-                    symbol_points[board[i][j]]++;
-
-                if (board[i][j] == board[i + 1][j] && board[i + 1][j] == board[i + 2][j])
-                    symbol_points[board[i][j]]++;
-
-
-                if (board[i][j] == board[i + 1][j + 1] && board[i + 1][j + 1] == board[i + 2][j + 2])
-                    symbol_points[board[i + 1][j + 1]]++;
-
-                if (board[i][j + 2] == board[i + 1][j + 1] && board[i + 1][j + 1] == board[i + 2][j])
-                    symbol_points[board[i + 1][j + 1]]++;
-            }
-        }
     }
-    auto it1 = symbol_points.begin();
-    auto it2 = ++symbol_points.begin();
-    if (it1->second == it2->second)
+    if (x_points == o_points)
         cout << "Draw!\n";
-    else if (it1->second > it2->second)
-        cout << "player with symbol " << it1->first << " wins with " << it1->second<<" points\n";
+    else if (x_points > o_points)
+        cout << "player with symbol X" << " wins with " << x_points << " points\n";
 
     else
-        cout << "player with symbol " << it2->first << " wins with " << it2->second<<" points\n";
+        cout << "player with symbol Y" << " wins with " << o_points << " points\n";
     return false;
 }
 
@@ -98,6 +70,16 @@ bool Five_Five_Board::game_is_over() {
         return true;
     return false;
 }
+
+bool Five_Five_Board::update_board(int x, int y, char mark) {
+    if (x < n_rows && y < n_cols && board[x][y] == 0) {
+        board[x][y] = toupper(mark);
+        n_moves++;
+        return true;
+    }
+    return false;
+}
+
 
 
 void Five_Five_Board::display_board() {
@@ -115,7 +97,45 @@ void Five_Five_Board::display_board() {
 }
 
 
-
 int Five_Five_Board::minimax(int &x, int &y, bool isMaximizing, bool firstTime) {
-    return 0;
+//    int max_x_points = 0;
+//    int max_o_points = 0;
+//    int final_x, final_y;
+//    for (int i = 0; i < n_rows; ++i) {
+//        for (int j = 0; i < n_cols; ++j) {
+//            if (board[i][j] != 0) {
+//                board[i][j] = 'O';
+//                update_points();
+//                if (o_points > max_o_points) {
+//                    final_x = i;
+//                    final_y = j;
+//                    max_o_points = o_points;
+//                }
+//                board[i][j] = 0;
+//            }
+//        }
+//    }
+//    if(max_o_points == 0){
+//        for (int i = 0; i < n_rows; ++i) {
+//            for (int j = 0; i < n_cols; ++j) {
+//                if (board[i][j] != 0) {
+//                    board[i][j] = 'X';
+//                    update_points();
+//                    if (x_points > max_x_points) {
+//                        final_x = i;
+//                        final_y = j;
+//                        max_x_points = x_points;
+//                    }
+//                    board[i][j] = 0;
+//
+//                }
+//            }
+//        }
+//    }
+//    if(max_x_points == 0){
+//        x = (int)(rand() / (RAND_MAX + 1.0) * 5);
+//        y = (int)(rand() / (RAND_MAX + 1.0) * 5);
+//    }
+
+
 }
