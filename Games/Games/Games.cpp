@@ -1,6 +1,17 @@
 #include <iostream>
 #include "BoardGame_Classes.h"
 
+// FCAI - OOP Programming - 2023 - Assignment 3
+// Program Name: Games.cpp
+// Last Modification Date:  17/12/2023
+// Author1 and ID and Group:  Abdullah Saeed Alnami  20220705  bdallhsydalnmy@gmail.com Section 9
+// Author2 and ID and Group:  Eslam Sayed Younus     20220495  eslam894408@gmail.com    Section 9
+// Author3 and ID and Group:  Youssef Hossam Ahmed   20220390  y.hossam2274@gmail.com   Section 9
+// Teaching Assistant: Samar Sabry Shaker
+
+// Purpose: Making Game App that contain 3 Games Tic Tac Toe(Pyramic, Four in a row, 5x5)
+
+
 void play() {
     Board *board = nullptr;
     Player *players[2];
@@ -25,12 +36,19 @@ void play() {
     else if (Game_choice == 4)
         board = new X_O_Board();
 
-    int dimension = (Game_choice == 3) ? 5 : 3;
+    int dimension;
+    if (Game_choice == 2)
+        dimension = 7;
+    else if (Game_choice == 3)
+        dimension = 5;
+    else
+        dimension = 3;
+
+
 
     cout << "\nPlay with:\n\n"
-         << "1) Computer\n"
-         << "2) Friend\n"
-         << "3) AI (under progress)\n";
+        << "1) Computer\n"
+        << "2) Friend\n";
     cout << "\nChoice >> ";
     int choice;
     cin >> choice;
@@ -44,6 +62,7 @@ void play() {
     else if (choice == 3)
         players[1] = new AIPlayer('O', board);
 
+
     GameManager game(board, players);
     game.run();
 
@@ -52,6 +71,5 @@ void play() {
 
 int main() {
     play();
-    //TestAI_1();
     return 0;
 }

@@ -22,8 +22,12 @@ namespace GamesGUI {
 			label5->Hide();
 			textBox1->Hide();
 			checkBox1->Hide();
-
+			label6->Hide();
 			x_turn = true;
+			for (int i = 0; i < 11; ++i)
+				charGrid[i] = "0";
+			charGrid[0] = "X";
+			charGrid[10] = "X";
 		}
 
 	protected:
@@ -64,16 +68,74 @@ namespace GamesGUI {
 		   System::String^ player2name = "";
 		   bool is_computer;
 		   bool x_turn;
-		   array<char>^ charGrid = gcnew array<char>(9);
+		   bool game_is_over = false;
+	private: System::Windows::Forms::Label^ label6;
+		   array<System::String^>^ charGrid = gcnew array<System::String^>(11);
 		   void update_turn()
 		   {
-		   	x_turn = !x_turn;
-		   	label5->Text = "Turn: " + (x_turn ? "X" : "O");
+			   x_turn = !x_turn;
+			   label5->Text = "Turn: " + (x_turn ? "X" : "O");
+		   }
+		   bool equal(System::String^ s1, System::String^ s2, System::String^ s3)
+		   {
+			   if (s1 == s2 && s2 == s3 && s2 != "0")
+				   return true;
+			   return false;
+
 		   }
 
+		   int check_status()
+		   {
+			   // handle diag
+			   if (equal(charGrid[1], charGrid[2], charGrid[5]) || equal(charGrid[1], charGrid[4], charGrid[9]))
+				   return (charGrid[1] == "X") ? 2 : -2;
 
+			   //handle verticall
+			   if (equal(charGrid[1], charGrid[3], charGrid[7]))
+				   return (charGrid[1] == "X") ? 2 : -2;
 
+			   // handle horizontall
+			   if (equal(charGrid[5], charGrid[6], charGrid[7]) ||
+				   equal(charGrid[6], charGrid[7], charGrid[8]) || equal(charGrid[7], charGrid[8], charGrid[9]))
+				   return (charGrid[7] == "X") ? 2 : -2;
 
+			   for (int i = 0; i < 11; ++i)
+				   if (charGrid[i] == "0")
+					   return 1;
+
+			   return false;
+		   }
+
+		   bool is_win()
+		   {
+			   if (check_status() == 2 || check_status() == -2)
+				   return true;
+			   return false;
+		   }
+
+		   bool is_Draw()
+		   {
+			   return (check_status() == 1);
+		   }
+
+		   void Update_status()
+		   {
+			   if (check_status() == 2)
+			   {
+				   label6->Show();
+				   label6->Text = "Player 1 " + player1name + " with symbol X is Win!!", game_is_over = true;
+			   }
+			   else if (check_status() == -2)
+			   {
+				   label6->Show();
+				   label6->Text = "Player 2 " + player2name + " with symbol O is Win!!", game_is_over = true;
+			   }
+			   else if (check_status() == 0)
+			   {
+				   label6->Show();
+				   label6->Text = "Player 1 & Player 2 are Draw!!", game_is_over = true;
+			   }
+		   }
 
 
 	private:
@@ -101,6 +163,7 @@ namespace GamesGUI {
 			this->button12 = (gcnew System::Windows::Forms::Button());
 			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
 			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -121,11 +184,11 @@ namespace GamesGUI {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(530, 97);
+			this->button2->Location = System::Drawing::Point(423, 175);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(101, 68);
 			this->button2->TabIndex = 3;
-			this->button2->Text = L"1";
+			this->button2->Text = L"2";
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &Pyramic_Board::button2_Click);
 			// 
@@ -141,21 +204,21 @@ namespace GamesGUI {
 			// 
 			// button4
 			// 
-			this->button4->Location = System::Drawing::Point(423, 175);
+			this->button4->Location = System::Drawing::Point(637, 175);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(101, 68);
 			this->button4->TabIndex = 5;
-			this->button4->Text = L"2";
+			this->button4->Text = L"4";
 			this->button4->UseVisualStyleBackColor = true;
 			this->button4->Click += gcnew System::EventHandler(this, &Pyramic_Board::button4_Click);
 			// 
 			// button5
 			// 
-			this->button5->Location = System::Drawing::Point(637, 175);
+			this->button5->Location = System::Drawing::Point(316, 249);
 			this->button5->Name = L"button5";
 			this->button5->Size = System::Drawing::Size(101, 68);
 			this->button5->TabIndex = 6;
-			this->button5->Text = L"4";
+			this->button5->Text = L"5";
 			this->button5->UseVisualStyleBackColor = true;
 			this->button5->Click += gcnew System::EventHandler(this, &Pyramic_Board::button5_Click);
 			// 
@@ -191,21 +254,21 @@ namespace GamesGUI {
 			// 
 			// button9
 			// 
-			this->button9->Location = System::Drawing::Point(316, 249);
+			this->button9->Location = System::Drawing::Point(744, 249);
 			this->button9->Name = L"button9";
 			this->button9->Size = System::Drawing::Size(101, 68);
 			this->button9->TabIndex = 10;
-			this->button9->Text = L"5";
+			this->button9->Text = L"9";
 			this->button9->UseVisualStyleBackColor = true;
 			this->button9->Click += gcnew System::EventHandler(this, &Pyramic_Board::button9_Click);
 			// 
 			// button10
 			// 
-			this->button10->Location = System::Drawing::Point(744, 249);
+			this->button10->Location = System::Drawing::Point(530, 102);
 			this->button10->Name = L"button10";
 			this->button10->Size = System::Drawing::Size(101, 68);
 			this->button10->TabIndex = 11;
-			this->button10->Text = L"9";
+			this->button10->Text = L"1";
 			this->button10->UseVisualStyleBackColor = true;
 			this->button10->Click += gcnew System::EventHandler(this, &Pyramic_Board::button10_Click);
 			// 
@@ -275,11 +338,21 @@ namespace GamesGUI {
 			this->label5->TabIndex = 19;
 			this->label5->Text = L"Turn:  X";
 			// 
+			// label6
+			// 
+			this->label6->AutoSize = true;
+			this->label6->Location = System::Drawing::Point(372, 374);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(44, 16);
+			this->label6->TabIndex = 20;
+			this->label6->Text = L"label6";
+			// 
 			// Pyramic_Board
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(873, 485);
+			this->Controls->Add(this->label6);
 			this->Controls->Add(this->label5);
 			this->Controls->Add(this->checkBox1);
 			this->Controls->Add(this->button12);
@@ -356,95 +429,113 @@ namespace GamesGUI {
 		label4->Hide();
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (button2->Text != "X" && button2->Text != "O")
+		if (button2->Text != "X" && button2->Text != "O" && !game_is_over)
 		{
 			if (x_turn)
 				button2->Text = "X";
 			else
 				button2->Text = "O";
+			charGrid[2] = button2->Text;
+			Update_status();
 			update_turn();
 		}
 	}
 	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (button4->Text != "X" && button4->Text != "O")
+		if (button4->Text != "X" && button4->Text != "O" && !game_is_over)
 		{
 			if (x_turn)
 				button4->Text = "X";
 			else
 				button4->Text = "O";
+			charGrid[4] = button4->Text;
+			Update_status();
 			update_turn();
 		}
 	}
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (button3->Text != "X" && button3->Text != "O")
+		if (button3->Text != "X" && button3->Text != "O" && !game_is_over)
 		{
 			if (x_turn)
 				button3->Text = "X";
 			else
 				button3->Text = "O";
+			charGrid[3] = button3->Text;
+			Update_status();
 			update_turn();
 		}
 
 	}
 	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (button5->Text != "X" && button5->Text != "O")
+		if (button5->Text != "X" && button5->Text != "O" && !game_is_over)
 		{
 			if (x_turn)
 				button5->Text = "X";
 			else
 				button5->Text = "O";
+			charGrid[5] = button5->Text;
+			Update_status();
 			update_turn();
 		}
 
 	}
 	private: System::Void button9_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (button9->Text != "X" && button9->Text != "O")
+		if (button9->Text != "X" && button9->Text != "O" && !game_is_over)
 		{
 			if (x_turn)
 				button9->Text = "X";
 			else
 				button9->Text = "O";
+			charGrid[9] = button9->Text;
+			Update_status();
 			update_turn();
 		}
 	}
 	private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (button6->Text != "X" && button6->Text != "O")
+		if (button6->Text != "X" && button6->Text != "O" && !game_is_over)
 		{
 			if (x_turn)
 				button6->Text = "X";
 			else
 				button6->Text = "O";
+			charGrid[6] = button6->Text;
+			Update_status();
 			update_turn();
 		};
 
 	}
 	private: System::Void button7_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (button7->Text != "X" && button7->Text != "O")
+		if (button7->Text != "X" && button7->Text != "O" && !game_is_over)
 		{
 			if (x_turn)
 				button7->Text = "X";
 			else
 				button7->Text = "O";
+			charGrid[7] = button7->Text;
+			Update_status();
 			update_turn();
 		}
 	}
 	private: System::Void button8_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (button8->Text != "X" && button8->Text != "O")
+		if (button8->Text != "X" && button8->Text != "O" && !game_is_over)
 		{
 			if (x_turn)
 				button8->Text = "X";
 			else
 				button8->Text = "O";
+			charGrid[8] = button8->Text;
+			Update_status();
 			update_turn();
 		}
 	}
 	private: System::Void button10_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (button10->Text != "X" && button10->Text != "O")
+		if (button10->Text != "X" && button10->Text != "O" && !game_is_over)
 		{
 			if (x_turn)
 				button10->Text = "X";
 			else
 				button10->Text = "O";
+			charGrid[1] = button10->Text;
+			Update_status();
 			update_turn();
 		}
 	}

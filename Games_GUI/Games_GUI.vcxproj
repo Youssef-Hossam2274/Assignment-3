@@ -122,10 +122,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Five_Five_Board.cpp" />
     <ClCompile Include="MyForm.cpp" />
-    <ClCompile Include="Connect_four_game.cpp" />
-    <ClCompile Include="Pyramic_Board.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Five_Five_Board.h">

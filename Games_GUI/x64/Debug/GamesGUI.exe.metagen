@@ -17,10 +17,42 @@ Assembly System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=
 	hash=None, flags=None
 Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
 	hash=None, flags=None
-Class GamesGUI.Five_Five_Board: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+Class GamesGUI.MyForm1: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
-Class GamesGUI.Connect_Four_Board: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  Fields:
+    System.ComponentModel.Container components : Public
+    Int32 n_rows IsConst : Public
+    Int32 n_cols IsConst : Public
+    System.String player1name : Public
+    System.String player2name : Public
+    Boolean isname1taken : Public
+    Boolean isplayer1turn : Public
+    Int32 n_moves : Public
+    Int32 MAX_MOVES : Public
+    Boolean is_initialized : Public
+    Int32 gridLength IsConst : Public
+    SByte[] charGrid : Public
+    CoreEngine gameSetup IsByValue : Public, InitOnly
+    Int32 player_turn : Public
+  Methods:
+    GetIndex(Int32, Int32): PrivateScope, Public, HideBySig
+    SetValue(Int32, Int32, SByte IsSignUnspecifiedByte): PrivateScope, Public, HideBySig
+    GetValue(Int32, Int32): PrivateScope, Public, HideBySig
+    initialize_core_grid(): PrivateScope, Public, HideBySig
+    winner(): PrivateScope, Public, HideBySig
+    print_winner(Int32): PrivateScope, Public, HideBySig
+    update_status(): PrivateScope, Public, HideBySig
+    InitializeComponent(): PrivateScope, Public, HideBySig
+    next_turn(): PrivateScope, Public, HideBySig
+    MyForm1_Resize(Object, EventArgs): PrivateScope, Public, HideBySig
+Class GamesGUI.MyForm1+CoreEngine: AutoLayout, AnsiClass, Class, NestedPublic, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String[] players_names : Public
+    System.String[] symbols : Public
+    SByte[] symbols_CHAR : Public
+Class GamesGUI.Five_Five_Board: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
 Class GamesGUI.Pyramic_Board: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit

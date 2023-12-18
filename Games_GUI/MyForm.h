@@ -83,7 +83,7 @@ namespace GamesGUI {
 
 		void game1Button_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			Connect_Four_Board^ connect_four_board = gcnew Connect_Four_Board();
+			MyForm1^ connect_four_board = gcnew MyForm1();
 			connect_four_board->Show();
 		}
 

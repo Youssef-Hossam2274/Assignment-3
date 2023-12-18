@@ -136,6 +136,6 @@ int Five_Five_Board::minimax(int &x, int &y, bool isMaximizing, bool firstTime) 
 //        x = (int)(rand() / (RAND_MAX + 1.0) * 5);
 //        y = (int)(rand() / (RAND_MAX + 1.0) * 5);
 //    }
-
+    return 0;
 
 }
